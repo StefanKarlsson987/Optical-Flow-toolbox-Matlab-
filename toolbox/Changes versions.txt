@@ -1,0 +1,103 @@
+****************************
+v 1.01:
+
+- added pause function, keyboard interface, hit 'p' to toggle.
+- added framerate control. The application now has a target framerate of 25 frames/second. This will make application execution similar on all systems.
+- fixed a bug that stopped the videoInput library from working. 
+****************************
+
+v 1.02 BETA (Major Update and extension of content):
+bug fixes:
+- Any width and height(not only square images) of videoinput now fully supported
+
+updates:
+- tutorial tasks extended
+- tutorial pdf extended and improved
+    - discusses and illustrates the problem with noise, multiple motions, deviations from brightness constancy
+	- derivations properly formulated as error minimization techniques.
+	- pdf style improved for readability and presentation (syntax highligting, and fully copy-pasteable code among others)
+- file "ApertureIllustration" added, an interactive illustration of the aperture problem, including barberpole illustration and multiple motions
+- implementation of Horn and Schunk included, but not used in the tutorial pdf (in.method = 'HS')
+- temporal integration by recursive filtering added, to improve regularization and stability (in.tIntegration)
+
+
+(see file exampleUsage.m):
+- Saving and loading flow output supported (new input arguments)
+- Generation of interactive test images now supports added features:
+   - flicker
+   - muliple motions
+   - additive noise
+****************************
+   v 1.03 BETA 
+updates:
+- generation of groundtruth motion from test images now supported, see exampleUsage.m
+- The horn and schunk optical flow has been remolded to look more like the original (same numerical solution)
+- improved documentation
+****************************
+    v 1.04 BETA
+Bug fixes
+- mehotd "nothing" no longer crashes the application
+- in.bRecordFlow will now be ignored for methods that do not produce optical flow
+
+updates:
+- improved the synthetic images. The nature and direction of the linear symmetry textures (parallell smooth bars) are now differently oriented with respect to the rotational motion
+- method "edge" now has a correctly working interactive component. use keys R/F to increase/decrease the gamma parameter
+- improved pdf.
+****************************
+    v 1.05 BETA
+Bug fixes
+- all kinds of resolutions of both video files and camera input supported without crashing
+- camera input now covers the full field of view that the camera offers.
+- a few million more bugs fixed...
+
+
+updates(quite alot):
+- NEW FEATURE: THE FANCY FLOW PLAYER. Very se xy. see the pdf for details
+
+- The toolbox no longer takes matlab execution thread when running. Does not lock/block command line input, as long as it does not require 100% of the processing power. If you notice problems running things while a session is running, then add lag time to the toolbox (keys A/Q)
+
+- WARNING, DUE TO NEW USE OF TIMERS FOR THE FEATURE DESCRIBED ABOVE, THE TOOLBOX MAY HAVE PROBLEMS RUNNING ON OLDER VERSIONS OF MATLAB. NO TESTING HAS BEEN DONE ON VERSIONS PRIOR TO VERSION 2013a
+
+- optical flow methods are not provided as function handles, allowing easy implementation and usage of the toolbox for your own algorithms. The old interface where in.method was a string, is used for special cases of method, such as:
+   method = 'nothing';
+
+- optical flow methods no longer receive as input gradient information, but instead are fed imPrev and imNew, two images of the video input sequence (should have been from start)
+
+- new feature: the data you save using the recording feature can now be easily fed back into the toolbox. New option for "in.movieType" to be a string to the save folder of previous sessions.
+
+- new camera interfacing: the interface with the image aquisition toolbox has been tweaked for some speed, and some intelligence has been put into how driver modes are picked. The video feed no longer get variable amounts of the field of view, depending on the resolution. Full field of view now given, but at differently sampled x-y grid. 
+
+- new feature: the synthetic video generation now comes with groundtruth data. This assumes that the synthetic data consists of 4 disks with texture. Visualization based on extra vectors(low-res flow), and secondary video with color (hi-res flow) are implemented. 
+
+- new feature: various new rendering options for the synthetic video:
+   * background edge, for viewing multiple motions and motion boundary effects. The edge may also rotate.
+   * additive noise
+   * flicker generation
+
+- the toolbox now decides itself if it is going to visualize with color or vectors, based on the requested resolution of the flow field (if number of motion vectors = pixels, then color)
+
+- there are no longer specific methods streamlined for high res flow (they had the name ending "-full"). A flow method is assumed to output flow of resolution equal to video, or less.
+
+- input argument bFineScale has been removed. Each algorithm can handle their gradients as they like, and for the tutorial, the same effect of changing scales can be done using the argument vidRes.
+****************************
+    v 1.052
+Bug fixes
+- fixed rendering window jittering around during arrow rendering.
+
+updates:
+- Updated FancyFlow player with latest version, yielding better rendering, better frame rate and slightly better interface
+- new option: in.bAutoPlayWithPlayer controls whether recorded data is automatically played (with FancyFlowPlayer) after the session
+- updated documentation: remarks in runMe.m and VidProcessing.m. 
+
+
+****************************
+     v 1.053
+
+bug fixes:
+fixed the (windows only) videoInput port library. Should now support webcam input on newer versions of Matlab, when the image aquisition toolbox not available(or not configured properly)
+
+updates:
+- Changed the runMe.m file to have initial settings better corresponding to the tutorial pdf (OpticalFlowTutorialPart1.pdf)
+
+****************************
+

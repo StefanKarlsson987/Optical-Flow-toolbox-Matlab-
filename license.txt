@@ -1,4 +1,4 @@
-Copyright (c) 2016, Stefan Karlsson
+Copyright (c) 2014, Stefan Karlsson and Josef Bigun
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
